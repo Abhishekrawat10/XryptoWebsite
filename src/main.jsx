@@ -13,4 +13,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-export const server = `http://api.coingecko.com/api/v3`
+export const server = `https://api.coingecko.com/api/v3`;
