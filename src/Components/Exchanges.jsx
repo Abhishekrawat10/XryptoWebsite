@@ -28,7 +28,7 @@ const Exchanges = () => {
   useEffect(() => {
     const fetchExchanges = async () => {
       try {
-        const response = await fetch(`${server}/exchanges?per_page=250`);
+        const response = await fetch(`${server}/exchanges?per_page=50`);
         if (response.ok) {
           const data = await response.json();
           setExchanges(data);
@@ -72,8 +72,8 @@ const Exchanges = () => {
 };
 
 const ExchangeCard = ({ name, img, rank, url }) => (
-  <a href={url} target="_blank" rel="noopener noreferrer">
-    <VStack>
+  <a href={url} target="blank" >
+    <VStack w={'40'}  _hover={{transform:"scale(1.2)"}} transition={'all .3s'} margin={'3'} shadow={'lg'} p={4}>
       <Image
         src={img}
         w={"10"}
