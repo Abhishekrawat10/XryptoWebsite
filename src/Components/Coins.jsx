@@ -116,7 +116,7 @@ const Coins = () => {
   );
 };
 
-const CoinCard = ({ id, key, name, img, currpice, currencySymbol = "₹" }) => (
+const CoinCard = ({ id, name, img, currpice, currencySymbol = "₹" }) => (
   <Link to={`/coin/${id}`}>
     <VStack
       w={"40"}

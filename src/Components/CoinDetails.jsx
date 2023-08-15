@@ -1,12 +1,16 @@
 import {
+  Badge,
   Box,
   Container,
+  HStack,
   Image,
+  Progress,
   Radio,
   RadioGroup,
   Spinner,
-  Stack,
   Stat,
+  StatArrow,
+  StatHelpText,
   StatLabel,
   StatNumber,
   Text,
@@ -55,7 +59,7 @@ const CoinDetails = () => {
     fetchCoin();
   }, [params.id]);
   if (error) {
-    return <Error message={"Error while fetching data .. "} />;
+    return <Error message={"Error while fetching data .. "} />
   }
   return (
     <Container maxW={"container.xl"}>
@@ -64,31 +68,62 @@ const CoinDetails = () => {
       ) : (
         <>
           <Box w={"full"} borderWidth={1}>
-            {coin.id}
+            ghgs
           </Box>
           {/* <Button></Button> */}
-          <RadioGroup value={currency} onChange={setCurrency}>
-            <Stack spacing={4} direction="row">
+          <RadioGroup value={currency} onChange={setCurrency} p={"3"}>
+            <HStack spacing={"4"}>
               <Radio value={"inr"}>INR</Radio>
               <Radio value={"usd"}>USD</Radio>
-              <Radio value="eur">EURO</Radio>
-            </Stack>
+              <Radio value={"eur"}>EUR</Radio>
+            </HStack>
           </RadioGroup>
-          <VStack alignItems={"flex-start"} spacing={4} opacity={0.3}>
-            <Text alignSelf={"center"} fontSize={'large'}>
+          <VStack alignItems={"flex-start"} spacing={"4"} padding={"10"}>
+            <Text alignSelf={"center"} fontSize={"large"} opacity={"0.3"}>
               Last Updated on{" "}
               {Date(coin.market_data.last_updated).split("G")[0]}
             </Text>
             <Image src={coin.image.large} w={16} h={16} />
             <Stat>
               <StatLabel>{coin.name}</StatLabel>
-              <StatNumber>{currencysymbol}{coin}</StatNumber>
+              <StatNumber>
+                {currencysymbol}
+                {coin.market_data.current_price[currency]}
+              </StatNumber>
+              <StatHelpText>
+                <StatArrow
+                  type={
+                    coin.market_data.price_change_percentage_24h > 0
+                      ? "increase"
+                      : "decrease"
+                  }
+                />
+                {coin.market_data.price_change_percentage_24h}%
+              </StatHelpText>
             </Stat>
+            <Badge fontSize={"2xl"} bgColor={"blackAlpha.800"} color={"white"}>
+              {`#${coin.market_cap_rank}`}
+            </Badge>
+            <CustomBar
+              high={`${currencysymbol}${coin.market_data.high_24h[currency]}`}
+              low={`${currencysymbol}${coin.market_data.low_24h[currency]}`}
+            />
           </VStack>
         </>
       )}
     </Container>
   );
+};
+
+const CustomBar = ({ high, low }) => {
+  <VStack w={"full"}>
+    <Progress value={50} colorScheme={"teal"} w={"full"} />
+    <HStack justifyContent={"space-between"} w={"full"}>
+      <Badge colorScheme={"red"}>{low}</Badge>
+      <Text fontSize={"sm"}>24H Range</Text>
+      <Badge colorScheme={"green"}>{high}</Badge>
+    </HStack>
+  </VStack>
 };
 
 export default CoinDetails;
