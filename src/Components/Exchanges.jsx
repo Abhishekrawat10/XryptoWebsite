@@ -51,8 +51,12 @@ const Exchanges = () => {
   }
 
   return (
-    <Container maxW={"container.xl"}>
-      <HStack wrap={"wrap"} justifyContent={"space-evenly"}>
+    <Container maxW={"container.xl"} bgColor={"blackAlpha.900"} color={"white"}>
+      <HStack
+        wrap={"wrap"}
+        justifyContent={"space-evenly"}
+        bgColor={"blackAlpha.900"}
+      >
         {loading ? (
           <Spinner {...spinnerProp} />
         ) : (
@@ -73,7 +77,8 @@ const Exchanges = () => {
 
 const ExchangeCard = ({ name, img, rank, url }) => (
   <a href={url} target="blank" >
-    <VStack w={'40'}  _hover={{transform:"scale(1.2)"}} transition={'all .3s'} margin={'3'} shadow={'lg'} p={4}>
+    <VStack w={'40'}  _hover={{transform:"scale(1.2)"}} transition={'all .3s'} margin={'3'} shadow={'dark-lg'} p={4}>
+
       <Image
         src={img}
         w={"10"}

@@ -61,7 +61,7 @@ const Coins = () => {
   }
 
   return (
-    <Container maxW={"container.xl"}>
+    <Container maxW={"container.xl"} bgColor={"blackAlpha.900"} color={"white"}>
       {loading ? (
         <HStack justifyContent={"center"}>
           <Spinner {...spinnerProp} />
@@ -106,7 +106,7 @@ const Coins = () => {
           color={"white"}
           onClick={() => {
             let pageNo = page;
-            pageNo === 5 ? setPage(1) : setPage(pageNo + 1);
+            pageNo === 8 ? setPage(1) : setPage(pageNo + 1);
           }}
         >
           Next
@@ -116,14 +116,14 @@ const Coins = () => {
   );
 };
 
-const CoinCard = ({ id, name, img, currpice, currencySymbol = "₹" }) => (
+const CoinCard = ({key,id, name, img, currpice, currencySymbol = "₹" }) => (
   <Link to={`/coin/${id}`}>
     <VStack
       w={"40"}
       _hover={{ transform: "scale(1.2)" }}
       transition={"all .3s"}
       margin={"3"}
-      shadow={"lg"}
+      shadow={"dark-lg"}
       p={4}
     >
       <Image
